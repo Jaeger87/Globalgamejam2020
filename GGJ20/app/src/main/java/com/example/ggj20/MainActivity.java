@@ -9,20 +9,30 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.example.ggj20.utilities.Constants;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Set;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
 
+
+    @ViewById(R.id.nowplay)
+    TextView nowPlayText;
 
     private MediaPlayer player = null;
 
@@ -106,4 +116,56 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+
+    @Click({R.id.button})
+    void bismarkGianni() {
+        nowPlayText.setText("Bismark");
+        try {
+            AssetFileDescriptor afd = getAssets().openFd("Gianni Bismark, Franco126 Università (320).mp3");
+            startPlaying(afd);
+        }
+        catch (Exception e)
+        {
+            Log.d(TAG, e.getMessage());
+        }
+    }
+
+
+    private void startPlaying(AssetFileDescriptor afd) {
+
+        if(player == null) {
+            player = new MediaPlayer();
+            try {
+                player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
+                player.prepare();
+
+
+                player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+
+
+                        // stop streaming vocal note
+                        if (player != null) {
+                            stopPlaying();
+                        }
+                    }
+                });
+
+            } catch (IOException e) {
+                Log.e(TAG, "prepare() failed");
+            }
+        }
+
+        player.start();
+    }
+
+    public void stopPlaying() {
+        if(player != null) {
+            player.stop();
+            player.release();
+            player = null;
+        }
+    }
 }
