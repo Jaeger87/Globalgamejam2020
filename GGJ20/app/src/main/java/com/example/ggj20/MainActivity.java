@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     TextView nowPlayText;
 
     private MediaPlayer player = null;
+    private MediaPlayer soundPlayer = null;
 
     private static final String TAG = "MainGGJ20";
 
@@ -132,6 +133,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Click({R.id.button2})
+    void playThunder() {
+        nowPlayText.setText("Thunder");
+        try {
+            AssetFileDescriptor afd = getAssets().openFd("thunder.wav");
+            startSound(afd);
+        }
+        catch (Exception e)
+        {
+            Log.d(TAG, e.getMessage());
+        }
+    }
+
     private void startPlaying(AssetFileDescriptor afd) {
 
         if(player == null) {
@@ -166,6 +180,44 @@ public class MainActivity extends AppCompatActivity {
             player.stop();
             player.release();
             player = null;
+        }
+    }
+
+
+    private void startSound(AssetFileDescriptor afd) {
+
+        if(soundPlayer == null) {
+            soundPlayer = new MediaPlayer();
+            try {
+                soundPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(),afd.getLength());
+                soundPlayer.prepare();
+
+
+                soundPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+
+
+                        // stop streaming vocal note
+                        if (soundPlayer != null) {
+                            stopSound();
+                        }
+                    }
+                });
+
+            } catch (IOException e) {
+                Log.e(TAG, "prepare() failed");
+            }
+        }
+
+        soundPlayer.start();
+    }
+
+    public void stopSound() {
+        if(soundPlayer != null) {
+            soundPlayer.stop();
+            soundPlayer.release();
+            soundPlayer = null;
         }
     }
 }
