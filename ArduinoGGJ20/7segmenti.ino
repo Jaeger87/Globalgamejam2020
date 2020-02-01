@@ -67,46 +67,55 @@ void initialAnimation()
       case 0:
         {
           writePlease();
+          setColorStrip(RED);
           break;
         }
       case 1:
         {
           writePlease();
+          setColorStrip(RED);
           break;
         }
       case 2:
         {
           lc.clearDisplay(0);
+          setColorStrip(BLACK);
           break;
         }
       case 3:
         {
           writeRepair();
+          setColorStrip(RED);
           break;
         }
       case 4:
         {
           writeRepair();
+          setColorStrip(RED);
           break;
         }
       case 5:
         {
           lc.clearDisplay(0);
+          setColorStrip(BLACK);
           break;
         }
       case 6:
         {
           writeMe();
+          setColorStrip(RED);
           break;
         }
       case 7:
         {
           writeMe();
+          setColorStrip(RED);
           break;
         }
       case 8:
         {
           lc.clearDisplay(0);
+          setColorStrip(BLACK);
           break;
         }
     }

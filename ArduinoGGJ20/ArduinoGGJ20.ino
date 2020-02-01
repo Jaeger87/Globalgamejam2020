@@ -42,6 +42,7 @@ const uint32_t BLACK = strip.Color(0, 0, 0);
 
 uint32_t current_color_led_strip = BLACK;
 
+const int coccoLed1 = 22;
 
 const int buttonRedOperator = 27;
 const int buttonGreenOperator = 28;
@@ -72,7 +73,7 @@ const int greenButtonPinGreenP = 47;
 const int blueButtonPinGreenP = 48;
 const int blackButtonPinGreenP = 49;
 
-const byte buzzer = 19;
+const byte buzzer = 29;
 byte minuti = 0;
 byte secondi = 0;
 byte decimiSecondi = 0;
@@ -210,7 +211,7 @@ void loop() {
 
     case GAMEOVER:
       {
-
+        printer.println(F("Game over\n\n"));
         break;
       }
     default:
