@@ -7,7 +7,6 @@ void scegliProva()
     return;
   }
 
-
   while (1)
   {
     long randNumber = random(3);

@@ -53,6 +53,13 @@ void initialAnimation()
   {
     int whichAnimation = animationCounter % 9;
 
+    buttonRedOperatorState = digitalRead(buttonRedOperator);
+    buttonGreenOperatorState = digitalRead(buttonGreenOperator);
+
+
+    if(buttonRedOperatorState == HIGH && buttonGreenOperatorState == HIGH)
+      return;
+      
     switch (animationCounter)
     {
       case 0:
@@ -106,13 +113,12 @@ void initialAnimation()
   }
 }
 
-
-
-
 void aggiornaTempo()
 {
+  noTone(buzzer);
   byte vecchiMinuti = minuti;
   long currentTime = millis();
+
   if (oldTime - currentTime > 100)
   {
     decimiSecondi -= 1;

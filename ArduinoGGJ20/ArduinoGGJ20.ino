@@ -32,6 +32,8 @@ const uint32_t RED = strip.Color(colorsIntensity, 0, 0);
 const uint32_t GREEN = strip.Color(0, colorsIntensity, 0);
 const uint32_t BLU = strip.Color(0, 0, colorsIntensity);
 const uint32_t YELLOW = strip.Color(colorsIntensity, colorsIntensity, 0);
+const uint32_t MAGENTA = strip.Color(colorsIntensity, 0, colorsIntensity);
+const uint32_t CYAN = strip.Color(0, colorsIntensity, colorsIntensity);
 const uint32_t WHITE = strip.Color(whiteIntensity, whiteIntensity, whiteIntensity);
 const uint32_t BLACK = strip.Color(0, 0, 0);
 
@@ -119,6 +121,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  
   switch (chapter)
   {
     case INIT:
