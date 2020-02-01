@@ -51,9 +51,28 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String text = intent.getStringExtra("Message");
+            Log.d(TAG, text);
 
             if(text.contains("ALI"))
                 return;
+
+            if(text.startsWith("id"))
+            {
+                Log.d(TAG, String.valueOf(text.length()));
+
+                String[] messageArray = text.split(":");
+                int idSound = Integer.parseInt(messageArray[1]);
+                switch(idSound)
+                {
+                    case 1:
+                        bismarkGianni();
+                        break;
+                    case 2:
+                        playThunder();
+                        break;
+                }
+
+            }
 
         }
     };
@@ -121,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Click({R.id.button})
     void bismarkGianni() {
-        nowPlayText.setText("Bismark");
+        //nowPlayText.setText("Bismark");
         try {
             AssetFileDescriptor afd = getAssets().openFd("Gianni Bismark, Franco126 Università (320).mp3");
             startPlaying(afd);
@@ -135,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Click({R.id.button2})
     void playThunder() {
-        nowPlayText.setText("Thunder");
+       // nowPlayText.setText("Thunder");
         try {
             AssetFileDescriptor afd = getAssets().openFd("thunder.wav");
             startSound(afd);
