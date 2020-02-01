@@ -1,0 +1,4 @@
+Rfid  ----- Trova schedina ----- Ok
+Coccodrilli ----- collega i coccodrilli al giusto pezzo de ferro -----ok
+scheda rfid ----- A e B ------ indifferente
+Bottoni e striscia led ----- 
