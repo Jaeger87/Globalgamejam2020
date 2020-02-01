@@ -11,9 +11,22 @@ boolean coccoGame()
   int cocchibenConnessi = 0;
 
   int counterCocco = 0;
+
+  int red1Counter = 0;
+  int green1Counter = 0;
+  int white1Counter = 0;
+  int yellow1Counter = 0;
+  int black1Counter = 0;
   while(cocchibenConnessi < 5)
   {
-    
+    int coccoIndex = counterCocco % 8;
+
+    digitalWrite(redCoccoPinRP, redSignal[coccoIndex]);
+    digitalWrite(yellowCoccoPinRP, yellowSignal[coccoIndex]);
+    digitalWrite(greenCoccoPinRP, greenSignal[coccoIndex]);
+    digitalWrite(whiteCoccoPinRP, whiteSignal[coccoIndex]);
+    digitalWrite(blackCoccoPinRP, blackSignal[coccoIndex]);
+    counterCocco++;
     delayMio(50);
   }
   

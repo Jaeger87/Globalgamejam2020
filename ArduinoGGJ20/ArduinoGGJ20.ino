@@ -50,13 +50,13 @@ const int buttonGreenOperator = 28;
 const int redCoccoPinRP = 30;
 const int yellowCoccoPinRP = 31;
 const int greenCoccoPinRP = 32;
-const int blueCoccoPinRP = 33;
+const int whiteCoccoPinRP = 33;
 const int blackCoccoPinRP = 34;
 
 const int redCoccoPinGreenP = 35;
 const int yellowCoccoPinGreenP = 36;
 const int greenCoccoPinGreenP = 37;
-const int blueCoccoPinGreenP = 38;
+const int whiteCoccoPinGreenP = 38;
 const int blackCoccoPinGreenP = 39;
 
 
@@ -141,12 +141,12 @@ void setup() {
   pinMode(redCoccoPinRP, INPUT);
   pinMode(yellowCoccoPinRP, INPUT);
   pinMode(greenCoccoPinRP, INPUT);
-  pinMode(blueCoccoPinRP, INPUT);
+  pinMode(whiteCoccoPinRP, INPUT);
   pinMode(blackCoccoPinRP, INPUT);
   pinMode(redCoccoPinGreenP, OUTPUT);
   pinMode(yellowCoccoPinGreenP, OUTPUT);
   pinMode(greenCoccoPinGreenP, OUTPUT);
-  pinMode(blueCoccoPinGreenP, OUTPUT);
+  pinMode(whiteCoccoPinGreenP, OUTPUT);
   pinMode(blackCoccoPinGreenP, OUTPUT);
 
   initializeGame();
