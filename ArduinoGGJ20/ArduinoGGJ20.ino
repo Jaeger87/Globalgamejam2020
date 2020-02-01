@@ -46,6 +46,20 @@ uint32_t current_color_led_strip = BLACK;
 const int buttonRedOperator = 27;
 const int buttonGreenOperator = 28;
 
+
+const int redCoccoPinRP = 30;
+const int yellowCoccoPinRP = 31;
+const int greenCoccoPinRP = 32;
+const int blueCoccoPinRP = 33;
+const int blackCoccoPinRP = 34;
+
+const int redCoccoPinGreenP = 35;
+const int yellowCoccoPinGreenP = 36;
+const int greenCoccoPinGreenP = 37;
+const int blueCoccoPinGreenP = 38;
+const int blackCoccoPinGreenP = 39;
+
+
 const int redButtonPinRP = 40;
 const int yellowButtonPinRP = 41;
 const int greenButtonPinRP = 42;
@@ -66,6 +80,12 @@ byte decimiDaTogliere = 1;
 
 bool timeIsOver = false;
 
+const int coccoVerdeCode = 0;
+const int coccoRedCode = 1;
+const int coccoWhiteCode = 2;
+const int coccoYellowCode = 4;
+const int coccoBlackCode = 6;
+
 const int shortDelayPrinter = 800;
 const int longDelayPrinter = 1500;
 const int veryLongDelayPrinter = 4500;
@@ -78,7 +98,7 @@ long oldTime = millis();
 
 //Dichiarazione dei capitoli della storia (stati in cui si può trovare il gioco)
 enum  computerStatus {
-  SETUP, INIT, TROVAIL6, COCCODRILLI, ISTRUZIONILONTANE, YOUDIE, YOUWIN
+  SETUP, INIT, TROVAIL6, COCCODRILLI, ISTRUZIONILONTANE, GAMEOVER, YOUWIN
 };
 computerStatus chapter = INIT;
 
@@ -118,13 +138,24 @@ void setup() {
   pinMode(blueButtonPinGreenP, INPUT);
   pinMode(blackButtonPinGreenP, INPUT);
 
+  pinMode(redCoccoPinRP, INPUT);
+  pinMode(yellowCoccoPinRP, INPUT);
+  pinMode(greenCoccoPinRP, INPUT);
+  pinMode(blueCoccoPinRP, INPUT);
+  pinMode(blackCoccoPinRP, INPUT);
+  pinMode(redCoccoPinGreenP, OUTPUT);
+  pinMode(yellowCoccoPinGreenP, OUTPUT);
+  pinMode(greenCoccoPinGreenP, OUTPUT);
+  pinMode(blueCoccoPinGreenP, OUTPUT);
+  pinMode(blackCoccoPinGreenP, OUTPUT);
+
   initializeGame();
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
+
   switch (chapter)
   {
     case INIT:
@@ -133,7 +164,7 @@ void loop() {
         delayMio(shortDelayPrinter);
         initialAnimation();
 
-        
+        scegliProva();
         oldTime = millis();
         scriviTempo(minuti, secondi, decimiSecondi);
         break;
@@ -151,20 +182,37 @@ void loop() {
         printer.println(F("Operatori, andate nel reparto\nsoftware, recuperate e\ninstallate il software 6.\nOgni tre errori il tempo\ncalerà di 30 secondi\n\n"));
         delayMio(shortDelayPrinter);
 
-        nfcLoop();
-
+        if (nfcLoop())
+          scegliProva();
+        else
+          chapter = GAMEOVER;
         break;
       }
 
     case COCCODRILLI:
-    {
-      break;
-    }
+      {
+        printer.println(F("Operatori, è il momento di ricollegare i coccodrilli\n\n"));
+
+        if (coccoGame())
+          scegliProva();
+        else
+          chapter = GAMEOVER;
+
+        break;
+      }
 
     case ISTRUZIONILONTANE:
-    {
-      break;
-    }
+      {
+        printer.println(F("Rosso, vai a cercare le istruzioni sul muro\n\n"));
+
+        break;
+      }
+
+    case GAMEOVER:
+      {
+
+        break;
+      }
     default:
       {
         break;

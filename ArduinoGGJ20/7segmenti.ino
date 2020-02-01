@@ -146,11 +146,6 @@ void aggiornaTempo()
   oldTime = currentTime;
 }
 
-
-
-
-
-
 void aggiornaTempoNoBuzzer()
 {
   byte vecchiMinuti = minuti;
