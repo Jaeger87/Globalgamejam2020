@@ -49,6 +49,8 @@ void initialAnimation()
 {
   bool startGame = false;
   int animationCounter = 0;
+  bool buttonRedOperatorState = LOW;
+  bool buttonGreenOperatorState = LOW;
   while (!startGame)
   {
     int whichAnimation = animationCounter % 9;
@@ -127,6 +129,40 @@ void aggiornaTempo()
       decimiSecondi = 9;
       secondi--;
       tone(buzzer, 900);
+    }
+    if (secondi > 61)
+    {
+      secondi = 59;
+      minuti--;
+    }
+
+    if (vecchiMinuti < minuti) //UNDERFLOW
+    {
+      minuti = 0;
+      secondi = 0;
+      decimiSecondi = 0;
+    }
+  }
+  oldTime = currentTime;
+}
+
+
+
+
+
+
+void aggiornaTempoNoBuzzer()
+{
+  byte vecchiMinuti = minuti;
+  long currentTime = millis();
+
+  if (oldTime - currentTime > 100)
+  {
+    decimiSecondi -= 1;
+    if (decimiSecondi > 10)//UNDERFLOW
+    {
+      decimiSecondi = 9;
+      secondi--;
     }
     if (secondi > 61)
     {

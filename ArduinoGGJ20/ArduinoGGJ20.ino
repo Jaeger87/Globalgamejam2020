@@ -28,6 +28,9 @@ const byte delayStandard = 50;
 const byte colorsIntensity = 190;
 const byte whiteIntensity = 170;
 
+const uint32_t software6NFCCode = 2865569238;
+
+
 const uint32_t RED = strip.Color(colorsIntensity, 0, 0);
 const uint32_t GREEN = strip.Color(0, colorsIntensity, 0);
 const uint32_t BLU = strip.Color(0, 0, colorsIntensity);
@@ -148,24 +151,20 @@ void loop() {
         printer.println(F("Operatori, andate nel reparto\nsoftware, recuperate e\ninstallate il software 6.\nOgni tre errori il tempo\ncalerà di 30 secondi\n\n"));
         delayMio(shortDelayPrinter);
 
-        uint8_t success;
-        uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  // Buffer to store the returned UID
-        uint8_t uidLength;                        // Length of the UID (4 or 7 bytes depending on ISO14443A card type)
-
-        // Wait for an ISO14443A type cards (Mifare, etc.).  When one is found
-        // 'uid' will be populated with the UID, and uidLength will indicate
-        // if the uid is 4 bytes (Mifare Classic) or 7 bytes (Mifare Ultralight)
-
-        bool software6Installed = false;
-
-        while (!software6Installed)
-        {
-          success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
-
-        }
+        nfcLoop();
 
         break;
       }
+
+    case COCCODRILLI:
+    {
+      break;
+    }
+
+    case ISTRUZIONILONTANE:
+    {
+      break;
+    }
     default:
       {
         break;
@@ -182,6 +181,21 @@ void delayMio(int milliSeconds)
 
   for (int i = 0; i < stops; i++)
     aggiornaScriviAspettaTempo();
+}
+
+void delayMioNoBuzzer(int milliSeconds)
+{
+  int stops = milliSeconds / delayStandard;
+
+  for (int i = 0; i < stops; i++)
+    aggiornaScriviAspettaTempoNoBuzzer();
+}
+
+void aggiornaScriviAspettaTempoNoBuzzer()
+{
+  aggiornaTempoNoBuzzer();
+  scriviTempo(minuti, secondi, decimiSecondi);
+  delay(delayStandard);
 }
 
 void aggiornaScriviAspettaTempo()
