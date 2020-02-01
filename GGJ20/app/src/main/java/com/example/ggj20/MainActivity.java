@@ -174,6 +174,8 @@ public class MainActivity extends AppCompatActivity {
                 player.prepare();
 
 
+
+
                 player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
@@ -190,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "prepare() failed");
             }
         }
-
+        player.setVolume(1.0f,1.0f);
         player.start();
     }
 
@@ -221,6 +223,11 @@ public class MainActivity extends AppCompatActivity {
                         if (soundPlayer != null) {
                             stopSound();
                         }
+
+                        if(player != null)
+                        {
+                            player.setVolume(1.0f,1.0f);
+                        }
                     }
                 });
 
@@ -228,6 +235,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "prepare() failed");
             }
         }
+        if(player != null)
+            player.setVolume(0.45f,0.45f);
 
         soundPlayer.start();
     }

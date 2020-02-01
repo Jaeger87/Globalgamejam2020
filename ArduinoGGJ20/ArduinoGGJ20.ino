@@ -47,7 +47,6 @@ const int coccoLed1 = 22;
 const int buttonRedOperator = 27;
 const int buttonGreenOperator = 28;
 
-
 const int redCoccoPinRP = 30;
 const int yellowCoccoPinRP = 31;
 const int greenCoccoPinRP = 32;
@@ -72,6 +71,11 @@ const int yellowButtonPinGreenP = 46;
 const int greenButtonPinGreenP = 47;
 const int blueButtonPinGreenP = 48;
 const int blackButtonPinGreenP = 49;
+
+const int teleAPin = 50;
+const int teleBPin = 51;
+const int teleCPin = 52;
+const int teleDPin = 53;
 
 const byte buzzer = 29;
 byte minuti = 0;
