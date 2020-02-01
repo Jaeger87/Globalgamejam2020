@@ -62,6 +62,11 @@ const int shortDelayPrinter = 800;
 const int longDelayPrinter = 1500;
 const int veryLongDelayPrinter = 4500;
 
+bool provaNFC = false;
+bool provaCoccodrilli = false;
+bool provaLontano = false;
+
+
 long oldTime = millis();
 
 //Dichiarazione dei capitoli della storia (stati in cui si può trovare il gioco)
@@ -103,14 +108,7 @@ void loop() {
   {
     case INIT:
       {
-
-        bool startGame = false;
-        int animationCounter = 0;
-        while(!startGame)
-        {
-          
-          delay(500);
-        }
+        initialAnimation();
         break;
       }
 
@@ -135,14 +133,13 @@ void loop() {
 
         bool software6Installed = false;
 
-        while(!software6Installed)
+        while (!software6Installed)
         {
           success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
 
-          
         }
-        
-        
+
+
 
         break;
       }
@@ -216,4 +213,8 @@ void initializeGame()
   decimiSecondi = 0;
   timeIsOver = false;
   oldTime = millis();
+
+  provaNFC = false;
+  provaCoccodrilli = false;
+  provaLontano = false;
 }

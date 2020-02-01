@@ -43,3 +43,65 @@ void scriviTempo(byte minuti, byte secondi, byte decimiSecondi)
   lc.setDigit(0,2,secondi%10,true);
   lc.setDigit(0,0,decimiSecondi,false);
 }
+
+
+void initialAnimation()
+{
+  bool startGame = false;
+        int animationCounter = 0;
+        while (!startGame)
+        {
+          int whichAnimation = animationCounter % 9;
+
+          switch (animationCounter)
+          {
+            case 0:
+              {
+                writePlease();
+                break;
+              }
+            case 1:
+              {
+                writePlease();
+                break;
+              }
+            case 2:
+              {
+                lc.clearDisplay(0); 
+                break;
+              }
+            case 3:
+              {
+                writeRepair();
+                break;
+              }
+            case 4:
+              {
+                writeRepair();
+                break;
+              }
+            case 5:
+              {
+                lc.clearDisplay(0);
+                break;
+              }
+            case 6:
+              {
+                writeMe();
+                break;
+              }
+            case 7:
+              {
+                writeMe();
+                break;
+              }
+            case 8:
+              {
+                lc.clearDisplay(0);
+                break;
+              }
+          }
+          animationCounter++;
+          delay(500);
+        }
+}
