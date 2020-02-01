@@ -38,6 +38,9 @@ const uint32_t BLACK = strip.Color(0, 0, 0);
 uint32_t current_color_led_strip = BLACK;
 
 
+const int buttonRedOperator = 27;
+const int buttonGreenOperator = 28;
+
 const int redButtonPinRP = 40;
 const int yellowButtonPinRP = 41;
 const int greenButtonPinRP = 42;
@@ -65,7 +68,6 @@ const int veryLongDelayPrinter = 4500;
 bool provaNFC = false;
 bool provaCoccodrilli = false;
 bool provaLontano = false;
-
 
 long oldTime = millis();
 
@@ -98,6 +100,19 @@ void setup() {
   mySerial.begin(9600);
   printer.begin();
 
+  pinMode(buttonRedOperator, INPUT);
+  pinMode(buttonGreenOperator, INPUT);
+  pinMode(redButtonPinRP, INPUT);
+  pinMode(yellowButtonPinRP, INPUT);
+  pinMode(greenButtonPinRP, INPUT);
+  pinMode(blueButtonPinRP, INPUT);
+  pinMode(blackButtonPinRP, INPUT);
+  pinMode(redButtonPinGreenP, INPUT);
+  pinMode(yellowButtonPinGreenP, INPUT);
+  pinMode(greenButtonPinGreenP, INPUT);
+  pinMode(blueButtonPinGreenP, INPUT);
+  pinMode(blackButtonPinGreenP, INPUT);
+
   initializeGame();
 
 }
@@ -108,13 +123,20 @@ void loop() {
   {
     case INIT:
       {
+        printer.println(F("Per favore\nriparatemi\noperatori\nQuando siete pronti premete\nI vostri tasti operatore\n\n"));
+        delayMio(shortDelayPrinter);
         initialAnimation();
+
+        
+        oldTime = millis();
+        scriviTempo(minuti, secondi, decimiSecondi);
         break;
       }
 
     case SETUP:
       {
         initializeGame();
+        delay(2000);
         break;
       }
 
@@ -139,15 +161,12 @@ void loop() {
 
         }
 
-
-
         break;
       }
     default:
       {
         break;
       }
-
 
   }
   aggiornaScriviAspettaTempo();
@@ -169,36 +188,6 @@ void aggiornaScriviAspettaTempo()
   delay(delayStandard);
 }
 
-void aggiornaTempo()
-{
-  byte vecchiMinuti = minuti;
-  long currentTime = millis();
-  if (oldTime - currentTime > 100)
-  {
-    decimiSecondi -= 1;
-    if (decimiSecondi > 10)//UNDERFLOW
-    {
-      decimiSecondi = 9;
-      secondi--;
-      tone(buzzer, 900);
-    }
-    if (secondi > 61)
-    {
-      secondi = 59;
-      minuti--;
-    }
-
-    if (vecchiMinuti < minuti) //UNDERFLOW
-    {
-      minuti = 0;
-      secondi = 0;
-      decimiSecondi = 0;
-    }
-  }
-  oldTime = currentTime;
-}
-
-
 void initializeGame()
 {
   lc.shutdown(0, false);
@@ -212,7 +201,6 @@ void initializeGame()
   secondi = 0;
   decimiSecondi = 0;
   timeIsOver = false;
-  oldTime = millis();
 
   provaNFC = false;
   provaCoccodrilli = false;
