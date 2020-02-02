@@ -193,6 +193,8 @@ void aggiornaTempoNoBuzzer()
       minuti = 0;
       secondi = 0;
       decimiSecondi = 0;
+      gameOver = true;
+      Serial.println("GameOver");
     }
   }
   oldTime = currentTime;

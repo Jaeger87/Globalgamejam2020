@@ -17,7 +17,9 @@ boolean giocoLontano()
       case START:
         Serial.println("START");
         setColorStrip(BLACK);
-        check = checkTelecomando(teleBPin, 4, teleDPin);
+
+        check = checkTelecomando(50, 4, teleDPin);
+        Serial.println(check);
         if (check == OK)
           gameStatus = DEBUG;
 
@@ -34,7 +36,7 @@ boolean giocoLontano()
       case PREMIB:
         Serial.println("PREMIB");
         setColorStrip(CYAN);
-        check = checkTelecomando(teleBPin, 4, teleBPin);
+        check = checkTelecomando(50, 4, teleBPin);
         if (check == OK)
           gameStatus = NERO;
         else if (check == ERRORE)
@@ -90,11 +92,16 @@ enum statiBOTTONE checkTelecomando(int startLeggere, int lunghezza, int quelloCh
   for (int i = startLeggere; i < startLeggere + lunghezza; i++)
   {
     int valueRead = digitalRead(i);
+    Serial.println(i);
+    Serial.println(valueRead);
     if (valueRead == HIGH)
+    {
+      
       if (i == quelloCheVoglio)
         stato = OK;
       else
         return ERRORE;
+    }
   }
 
   return stato;

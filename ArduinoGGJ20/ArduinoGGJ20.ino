@@ -86,9 +86,9 @@ const int blueButtonPinGreenP = 48;
 const int blackButtonPinGreenP = 49;
 
 const int teleAPin = 51;
-const int teleBPin = 50;
+const int teleBPin = 52;
 const int teleCPin = 53;
-const int teleDPin = 52;
+const int teleDPin = 50;
 
 const byte buzzer = 27;
 byte minuti = 0;
@@ -149,6 +149,14 @@ void setup() {
   mySerial.begin(9600);
   printer.begin();
 
+
+
+  pinMode(teleAPin, INPUT);
+  pinMode(teleBPin, INPUT);
+  pinMode(teleCPin, INPUT);
+  pinMode(teleDPin, INPUT);
+
+  
   pinMode(buttonRedOperator, INPUT);
   pinMode(buttonGreenOperator, INPUT);
   pinMode(redButtonPinRP, INPUT);
@@ -216,7 +224,7 @@ void loop() {
         {
           provaNFC = true;
           scegliProva();
-          
+
         }
         else
           chapter = GAMEOVER;
@@ -231,7 +239,7 @@ void loop() {
         {
           provaCoccodrilli = true;
           scegliProva();
-          
+
         }
         else
           chapter = GAMEOVER;

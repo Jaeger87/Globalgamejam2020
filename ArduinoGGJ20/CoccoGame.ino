@@ -45,18 +45,14 @@ boolean coccoGame()
 
     int coccoIndex = counterCocco % 8;
 
-    digitalWrite(redCoccoPinRP, redSignal[coccoIndex]);
-    digitalWrite(yellowCoccoPinRP, yellowSignal[coccoIndex]);
-    digitalWrite(greenCoccoPinRP, greenSignal[coccoIndex]);
-    digitalWrite(whiteCoccoPinRP, whiteSignal[coccoIndex]);
-    digitalWrite(blackCoccoPinRP, blackSignal[coccoIndex]);
-
     checkCocco(redCoccoPinRP, red1Counter, redConnesso, redCoccoPinRP, redCoccoPinGreenP, coccoIndex, cocchibenConnessi);
     checkCocco(yellowCoccoPinRP, yellow1Counter, yellowConnesso, yellowCoccoPinRP, yellowCoccoPinGreenP, coccoIndex, cocchibenConnessi);
     checkCocco(greenCoccoPinRP, green1Counter, greenConnesso, greenCoccoPinRP, greenCoccoPinGreenP, coccoIndex, cocchibenConnessi);
     checkCocco(whiteCoccoPinRP, white1Counter, whiteConnesso, whiteCoccoPinRP, whiteCoccoPinGreenP, coccoIndex, cocchibenConnessi);
     checkCocco(blackCoccoPinRP, black1Counter, blackConnesso, blackCoccoPinRP, blackCoccoPinGreenP, coccoIndex, cocchibenConnessi);
 
+    Serial.println(digitalRead(redCoccoPinGreenP));
+  
     counterCocco++;
 
     int i = 0;
@@ -82,8 +78,11 @@ boolean coccoGame()
 void checkCocco(int colorSignal[], int &counter, boolean & coccoConnesso, int coccoPinRP, int coccoPinGreenP, int coccoIndex, int &cocchibenConnessi)
 {
   digitalWrite(coccoPinRP, colorSignal[coccoIndex]);
+  delayMio(50);
   int colorValueRead = digitalRead(coccoPinGreenP);
 
+  Serial.println(digitalRead(colorValueRead));
+  
   if (counter < 3)
   {
     if (colorValueRead == 1)

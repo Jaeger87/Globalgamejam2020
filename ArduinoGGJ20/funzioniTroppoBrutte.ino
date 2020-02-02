@@ -1,7 +1,7 @@
 void scegliProva()
 {
 
-  if (provaNFC && provaCoccodrilli && provaLontano)
+  if (provaNFC  && provaLontano)
   {
     chapter = YOUWIN;
     return;
@@ -22,15 +22,6 @@ void scegliProva()
           }
           break;
         }
-      case 1:
-        {
-          if (!provaCoccodrilli)
-          {
-            chapter = COCCODRILLI;
-            return;
-          }
-          break;
-        }
       case 2:
         {
           if (!provaLontano)
@@ -40,6 +31,8 @@ void scegliProva()
           }
           break;
         }
+      default :
+        break;
     }
   }
 }
