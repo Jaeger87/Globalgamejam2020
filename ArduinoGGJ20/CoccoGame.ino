@@ -24,8 +24,25 @@ boolean coccoGame()
   boolean yellowConnesso = false;
   boolean blackConnesso = false;
 
+  int randomVoice = 600 + random(200);
+
   while (cocchibenConnessi < 5)
   {
+
+
+    randomVoice--;
+    if (randomVoice == 400)
+    {
+      Serial2.println("id:3:");
+
+    }
+
+    if (randomVoice < 0)
+    {
+      Serial2.println("id:5:");
+      randomVoice += 17200;
+    }
+
     int coccoIndex = counterCocco % 8;
 
     digitalWrite(redCoccoPinRP, redSignal[coccoIndex]);
@@ -62,7 +79,7 @@ boolean coccoGame()
 }
 
 
-void checkCocco(int colorSignal[], int &counter, boolean &coccoConnesso, int coccoPinRP, int coccoPinGreenP, int coccoIndex, int &cocchibenConnessi)
+void checkCocco(int colorSignal[], int &counter, boolean & coccoConnesso, int coccoPinRP, int coccoPinGreenP, int coccoIndex, int &cocchibenConnessi)
 {
   digitalWrite(redCoccoPinRP, redSignal[coccoIndex]);
   int colorValueRead = digitalRead(coccoPinGreenP);

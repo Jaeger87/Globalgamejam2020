@@ -124,6 +124,8 @@ void initialAnimation()
   }
 }
 
+
+
 void aggiornaTempo()
 {
   noTone(buzzer);
@@ -145,6 +147,17 @@ void aggiornaTempo()
       minuti--;
     }
 
+    if (minuti == 1 && secondi == randomLieScontrini && !lieScontrini)
+    {
+      incoraggiamento = true;
+      Serial2.println("id:2:");
+    }
+
+    if (minuti == 0 && secondi == 45 && !incoraggiamento)
+    {
+      incoraggiamento = true;
+      Serial2.println("id:4:");
+    }
     if (vecchiMinuti < minuti) //UNDERFLOW
     {
       minuti = 0;

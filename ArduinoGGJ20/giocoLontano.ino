@@ -77,7 +77,6 @@ boolean giocoLontano()
 }
 
 
-
 enum statiBOTTONE checkTelecomando(int startLeggere, int lunghezza, int quelloCheVoglio)
 {
   statiBOTTONE stato = NIENTE;

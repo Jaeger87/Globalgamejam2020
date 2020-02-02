@@ -126,7 +126,7 @@ computerStatus chapter = INIT;
 void setup() {
 
   Serial.begin(9600);
-  Serial2.begin(9600);
+  Serial2.begin(9600); //id:1:
   // put your setup code here, to run once:
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
@@ -135,7 +135,7 @@ void setup() {
   uint32_t versiondata = nfc.getFirmwareVersion();
   if (! versiondata) {
     Serial.print("Didn't find PN53x board");
-   // while (1); // halt
+    // while (1); // halt
   }
   // Got ok data, print it out!
   Serial.print("Found chip PN5"); Serial.println((versiondata >> 24) & 0xFF, HEX);
@@ -185,6 +185,7 @@ void loop() {
     case INIT:
       {
         Serial.println("OK qui");
+        Serial2.println("id:0:");
         printer.println(F("Per favore\nriparatemi\noperatori\nQuando siete pronti premete\nI vostri tasti operatore\n\n"));
         delayMio(shortDelayPrinter);
         initialAnimation();
@@ -193,6 +194,7 @@ void loop() {
         scegliProva();
         oldTime = millis();
         scriviTempo(minuti, secondi, decimiSecondi);
+        Serial2.println("id:0:");
         break;
       }
 
@@ -244,6 +246,8 @@ void loop() {
     case GAMEOVER:
       {
         printer.println(F("Game over\n\n"));
+
+        chapter = SETUP;
         break;
       }
 
@@ -254,6 +258,8 @@ void loop() {
         printer.println(F("Adafruit!"));
         printer.feed(2);
         delay(600);
+
+        chapter = SETUP;
         break;
       }
     default:
@@ -296,8 +302,12 @@ void aggiornaScriviAspettaTempo()
   delay(delayStandard);
 }
 
+boolean incoraggiamento = false;
+boolean lieScontrini = false;
+int randomLieScontrini = 0;
 void initializeGame()
 {
+  randomSeed(analogRead(0));
   lc.shutdown(0, false);
   // Enable display
   lc.setIntensity(0, 10);
@@ -316,4 +326,9 @@ void initializeGame()
   gameOver = false;
 
   chapter = INIT;
+
+  incoraggiamento = false;
+  lieScontrini = false;
+  randomLieScontrini = 15 + random(15);
+
 }

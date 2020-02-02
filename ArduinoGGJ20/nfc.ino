@@ -1,8 +1,15 @@
 boolean nfcLoop()
 {
   int errors = 0;
+  int randomVoice = 60 + random(20);
   while (1)
   {
+    randomVoice--;
+    if (randomVoice < 0)
+    {
+      Serial2.println("id:1:");
+      randomVoice += 7200;
+    }
     uint8_t success;
     uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  // Buffer to store the returned UID
     uint8_t uidLength;                        // Length of the UID (4 or 7 bytes depending on ISO14443A card type)
