@@ -150,7 +150,6 @@ void setup() {
   printer.begin();
 
 
-
   pinMode(teleAPin, INPUT);
   pinMode(teleBPin, INPUT);
   pinMode(teleCPin, INPUT);
@@ -296,6 +295,7 @@ void delayMio(int milliSeconds)
   int stops = milliSeconds / delayStandard;
 
   for (int i = 0; i < stops; i++)
+  
     aggiornaScriviAspettaTempo();
 }
 

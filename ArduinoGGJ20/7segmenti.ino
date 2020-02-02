@@ -131,8 +131,7 @@ void aggiornaTempo()
   noTone(buzzer);
   byte vecchiMinuti = minuti;
   long currentTime = millis();
-
-  if (oldTime - currentTime > 100)
+  if (currentTime - oldTime > 100)
   {
     decimiSecondi -= 1;
     if (decimiSecondi > 10)//UNDERFLOW
@@ -158,6 +157,8 @@ void aggiornaTempo()
       incoraggiamento = true;
       Serial2.println("id:4:");
     }
+
+
     if (vecchiMinuti < minuti) //UNDERFLOW
     {
       minuti = 0;
@@ -165,8 +166,8 @@ void aggiornaTempo()
       decimiSecondi = 0;
       gameOver = true;
     }
+    oldTime = currentTime;
   }
-  oldTime = currentTime;
 }
 
 void aggiornaTempoNoBuzzer()
@@ -174,7 +175,8 @@ void aggiornaTempoNoBuzzer()
   byte vecchiMinuti = minuti;
   long currentTime = millis();
 
-  if (oldTime - currentTime > 100)
+  
+  if (currentTime - oldTime > 100)
   {
     decimiSecondi -= 1;
     if (decimiSecondi > 10)//UNDERFLOW
@@ -194,8 +196,7 @@ void aggiornaTempoNoBuzzer()
       secondi = 0;
       decimiSecondi = 0;
       gameOver = true;
-      Serial.println("GameOver");
     }
+    oldTime = currentTime;
   }
-  oldTime = currentTime;
 }

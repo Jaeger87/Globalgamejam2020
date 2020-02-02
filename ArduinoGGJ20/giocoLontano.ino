@@ -15,11 +15,10 @@ boolean giocoLontano()
     switch (gameStatus)
     {
       case START:
-        Serial.println("START");
+        //Serial.println("START");
         setColorStrip(BLACK);
 
         check = checkTelecomando(50, 4, teleDPin);
-        Serial.println(check);
         if (check == OK)
           gameStatus = DEBUG;
 
@@ -85,15 +84,14 @@ boolean giocoLontano()
   return true;
 }
 
-
 enum statiBOTTONE checkTelecomando(int startLeggere, int lunghezza, int quelloCheVoglio)
 {
   statiBOTTONE stato = NIENTE;
   for (int i = startLeggere; i < startLeggere + lunghezza; i++)
   {
     int valueRead = digitalRead(i);
-    Serial.println(i);
-    Serial.println(valueRead);
+    //Serial.println(i);
+    //Serial.println(valueRead);
     if (valueRead == HIGH)
     {
       
@@ -105,5 +103,4 @@ enum statiBOTTONE checkTelecomando(int startLeggere, int lunghezza, int quelloCh
   }
 
   return stato;
-
 }
