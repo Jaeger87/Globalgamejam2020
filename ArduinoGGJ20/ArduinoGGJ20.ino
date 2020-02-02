@@ -24,6 +24,18 @@ Adafruit_Thermal printer(&mySerial);     // Pass addr to printer constructor
 Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, LEDSTRIPPIN, NEO_GRB + NEO_KHZ800);
 
+enum statiLontano {
+  START, DEBUG, PREMIB, NERO, GIALLO, STAMPA, VERDEPREMEIVERDI
+};
+
+enum statiBOTTONE {
+  OK, NIENTE, ERRORE
+};
+statiBOTTONE checkTelecomando(int startLeggere, int lunghezza, int quelloCheVoglio);
+
+
+
+
 const byte delayStandard = 50;
 
 const byte colorsIntensity = 190;
@@ -73,10 +85,10 @@ const int greenButtonPinGreenP = 47;
 const int blueButtonPinGreenP = 48;
 const int blackButtonPinGreenP = 49;
 
-const int teleAPin = 50;
-const int teleBPin = 51;
-const int teleCPin = 52;
-const int teleDPin = 53;
+const int teleAPin = 52;
+const int teleBPin = 50;
+const int teleCPin = 53;
+const int teleDPin = 51;
 
 const byte buzzer = 29;
 byte minuti = 0;
