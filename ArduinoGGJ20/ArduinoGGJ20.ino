@@ -57,20 +57,20 @@ uint32_t current_color_led_strip = BLACK;
 
 const int coccoLed1 = 22;
 
-const int buttonRedOperator = 27;
-const int buttonGreenOperator = 28;
+const int buttonRedOperator = 38;
+const int buttonGreenOperator = 39;
 
-const int redCoccoPinRP = 30;
-const int yellowCoccoPinRP = 31;
-const int greenCoccoPinRP = 32;
-const int whiteCoccoPinRP = 33;
-const int blackCoccoPinRP = 34;
+const int redCoccoPinRP = 28;
+const int yellowCoccoPinRP = 29;
+const int greenCoccoPinRP = 30;
+const int whiteCoccoPinRP = 31;
+const int blackCoccoPinRP = 32;
 
-const int redCoccoPinGreenP = 35;
-const int yellowCoccoPinGreenP = 36;
-const int greenCoccoPinGreenP = 37;
-const int whiteCoccoPinGreenP = 38;
-const int blackCoccoPinGreenP = 39;
+const int redCoccoPinGreenP = 33;
+const int yellowCoccoPinGreenP = 34;
+const int greenCoccoPinGreenP = 35;
+const int whiteCoccoPinGreenP = 36;
+const int blackCoccoPinGreenP = 37;
 
 
 const int redButtonPinRP = 40;
@@ -90,7 +90,7 @@ const int teleBPin = 50;
 const int teleCPin = 53;
 const int teleDPin = 51;
 
-const byte buzzer = 29;
+const byte buzzer = 27;
 byte minuti = 0;
 byte secondi = 0;
 byte decimiSecondi = 0;
@@ -124,6 +124,9 @@ enum  computerStatus {
 computerStatus chapter = INIT;
 
 void setup() {
+
+  Serial.begin(9600);
+  Serial2.begin(9600);
   // put your setup code here, to run once:
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
@@ -132,7 +135,7 @@ void setup() {
   uint32_t versiondata = nfc.getFirmwareVersion();
   if (! versiondata) {
     Serial.print("Didn't find PN53x board");
-    while (1); // halt
+   // while (1); // halt
   }
   // Got ok data, print it out!
   Serial.print("Found chip PN5"); Serial.println((versiondata >> 24) & 0xFF, HEX);
@@ -176,11 +179,12 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  Serial.println("Sono nel loop");
   switch (chapter)
   {
     case INIT:
       {
+        Serial.println("OK qui");
         printer.println(F("Per favore\nriparatemi\noperatori\nQuando siete pronti premete\nI vostri tasti operatore\n\n"));
         delayMio(shortDelayPrinter);
         initialAnimation();
@@ -194,6 +198,7 @@ void loop() {
 
     case SETUP:
       {
+        Serial.println("SETUP");
         initializeGame();
         delay(2000);
         break;
@@ -201,6 +206,7 @@ void loop() {
 
     case TROVAIL6:
       {
+        Serial.println("Trova il 6");
         printer.println(F("Operatori, andate nel reparto\nsoftware, recuperate e\ninstallate il software 6.\nOgni tre errori il tempo\ncalerà di 30 secondi\n\n"));
         delayMio(shortDelayPrinter);
 
@@ -308,4 +314,6 @@ void initializeGame()
   provaCoccodrilli = false;
   provaLontano = false;
   gameOver = false;
+
+  chapter = INIT;
 }

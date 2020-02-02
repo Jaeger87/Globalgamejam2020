@@ -9,29 +9,42 @@
 boolean giocoLontano()
 {
   statiLontano gameStatus = START;
+  bool isOver = false;
 
-  switch (gameStatus)
+  while (!isOver)
   {
-    case START:
+    switch (gameStatus)
+    {
+      case START:
+        setColorStrip(BLACK);
+        statiBOTTONE check = checkTelecomando(teleBPin, 4, teleDPin);
+        if (check == OK)
+          gameStatus = DEBUG;
+          
+        break;
+      case DEBUG:
+        setColorStrip(RED);
+        break;
+      case PREMIB:
+        setColorStrip(CYAN);
+        break;
+      case NERO:
+        setColorStrip(MAGENTA);
+        break;
+      case GIALLO:
 
-      break;
-    case DEBUG:
-      break;
-    case PREMIB:
-      break;
-    case NERO:
-      break;
-    case GIALLO:
-      break;
-    case STAMPA:
-      break;
-    case VERDEPREMEIVERDI:
-      break;
+        break;
+      case STAMPA:
+        break;
+      case VERDEPREMEIVERDI:
+
+        isOver = true;
+        break;
+    }
   }
-
+  setColorStrip(BLACK);
+  return true;
 }
-
-
 
 
 
