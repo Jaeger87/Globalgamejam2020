@@ -81,7 +81,7 @@ boolean coccoGame()
 
 void checkCocco(int colorSignal[], int &counter, boolean & coccoConnesso, int coccoPinRP, int coccoPinGreenP, int coccoIndex, int &cocchibenConnessi)
 {
-  digitalWrite(redCoccoPinRP, redSignal[coccoIndex]);
+  digitalWrite(coccoPinRP, colorSignal[coccoIndex]);
   int colorValueRead = digitalRead(coccoPinGreenP);
 
   if (counter < 3)

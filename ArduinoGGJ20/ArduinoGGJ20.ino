@@ -85,10 +85,10 @@ const int greenButtonPinGreenP = 47;
 const int blueButtonPinGreenP = 48;
 const int blackButtonPinGreenP = 49;
 
-const int teleAPin = 52;
+const int teleAPin = 51;
 const int teleBPin = 50;
-const int teleCPin = 51;
-const int teleDPin = 53;
+const int teleCPin = 53;
+const int teleDPin = 52;
 
 const byte buzzer = 27;
 byte minuti = 0;
@@ -213,7 +213,11 @@ void loop() {
         delayMio(shortDelayPrinter);
 
         if (nfcLoop())
+        {
+          provaNFC = true;
           scegliProva();
+          
+        }
         else
           chapter = GAMEOVER;
         break;
@@ -224,7 +228,11 @@ void loop() {
         printer.println(F("Operatori, è il momento di ricollegare i coccodrilli\n\n"));
 
         if (coccoGame())
+        {
+          provaCoccodrilli = true;
           scegliProva();
+          
+        }
         else
           chapter = GAMEOVER;
 
@@ -236,7 +244,10 @@ void loop() {
         printer.println(F("Verde, vai a cercare le istruzioni sul muro\n\n"));
 
         if (giocoLontano())
+        {
+          provaLontano = true;
           scegliProva();
+        }
         else
           chapter = GAMEOVER;
 
