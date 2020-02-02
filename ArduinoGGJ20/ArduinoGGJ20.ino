@@ -1,6 +1,7 @@
 #include "Adafruit_Thermal.h"
 #include "SoftwareSerial.h"
 #include "LedControl.h"
+#include "biohazard.h"
 #include <Servo.h>
 #include <Adafruit_PN532.h>
 #include <Wire.h>
@@ -169,6 +170,7 @@ void loop() {
         delayMio(shortDelayPrinter);
         initialAnimation();
 
+        setColorStrip(BLACK);
         scegliProva();
         oldTime = millis();
         scriviTempo(minuti, secondi, decimiSecondi);
@@ -216,6 +218,14 @@ void loop() {
     case GAMEOVER:
       {
         printer.println(F("Game over\n\n"));
+        break;
+      }
+
+    case YOUWIN:
+      {
+        printer.printBitmap(135, 135, biohazard);
+        printer.println(F("Adafruit!"));
+        printer.feed(2);
         break;
       }
     default:
