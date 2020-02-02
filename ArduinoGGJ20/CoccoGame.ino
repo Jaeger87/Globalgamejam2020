@@ -48,14 +48,17 @@ boolean coccoGame()
       digitalWrite(coccoLed1 + 1, HIGH);
     }
 
-    for(i = cocchibenConnessi; i < 5; i++)
+    for (i = cocchibenConnessi; i < 5; i++)
     {
       digitalWrite(coccoLed1 + 1, LOW);
     }
     delayMio(50);
+
+    if (gameOver)
+      return false;
   }
 
-  return false;
+  return true;
 }
 
 

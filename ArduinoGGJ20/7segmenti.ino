@@ -59,9 +59,9 @@ void initialAnimation()
     buttonGreenOperatorState = digitalRead(buttonGreenOperator);
 
 
-    if(buttonRedOperatorState == HIGH && buttonGreenOperatorState == HIGH)
+    if (buttonRedOperatorState == HIGH && buttonGreenOperatorState == HIGH)
       return;
-      
+
     switch (animationCounter)
     {
       case 0:
@@ -150,6 +150,7 @@ void aggiornaTempo()
       minuti = 0;
       secondi = 0;
       decimiSecondi = 0;
+      gameOver = true;
     }
   }
   oldTime = currentTime;

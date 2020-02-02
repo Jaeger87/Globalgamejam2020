@@ -1,4 +1,4 @@
-void giocoLontano()
+boolean giocoLontano()
 {
-  
+
 }

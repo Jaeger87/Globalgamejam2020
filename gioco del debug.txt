@@ -1,0 +1,7 @@
+Premere D per entrare in modalità debug
+Quando la macchina è in debug, si illumina subito di Viola
+L'operatore ROSSO deve premere il tasto nero
+La macchina quindi diventerà di colore CIANO 
+L'operatore Verde può quindi procedere premendo il tasto B del telecomando
+La macchina diventerà ROSSA, Ora l'operatore rosso dovrà premere il pulsante che ha premuto prima e successivamente il giallo.
+Ora la macchina 

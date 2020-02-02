@@ -102,6 +102,9 @@ bool provaLontano = false;
 
 long oldTime = millis();
 
+
+boolean gameOver = false;
+
 //Dichiarazione dei capitoli della storia (stati in cui si può trovare il gioco)
 enum  computerStatus {
   SETUP, INIT, TROVAIL6, COCCODRILLI, ISTRUZIONILONTANE, GAMEOVER, YOUWIN
@@ -210,7 +213,12 @@ void loop() {
 
     case ISTRUZIONILONTANE:
       {
-        printer.println(F("Rosso, vai a cercare le istruzioni sul muro\n\n"));
+        printer.println(F("Verde, vai a cercare le istruzioni sul muro\n\n"));
+
+        if (giocoLontano())
+          scegliProva();
+        else
+          chapter = GAMEOVER;
 
         break;
       }
@@ -223,9 +231,11 @@ void loop() {
 
     case YOUWIN:
       {
+        setColorStrip(GREEN);
         printer.printBitmap(135, 135, biohazard);
         printer.println(F("Adafruit!"));
         printer.feed(2);
+        delay(600);
         break;
       }
     default:
@@ -285,4 +295,5 @@ void initializeGame()
   provaNFC = false;
   provaCoccodrilli = false;
   provaLontano = false;
+  gameOver = false;
 }

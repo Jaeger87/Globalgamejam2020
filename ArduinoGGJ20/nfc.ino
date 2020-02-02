@@ -27,16 +27,18 @@ boolean nfcLoop()
         if (cardid == software6NFCCode)
           return true;
         else
-          {
-            errors++;
-            secondi -= errors / 3;
-            tone(buzzer, 200);
-            delayMioNoBuzzer(1000);
-            noTone(buzzer);
-            delayMio(2000);
-          }
+        {
+          errors++;
+          secondi -= errors / 3;
+          tone(buzzer, 200);
+          delayMioNoBuzzer(1000);
+          noTone(buzzer);
+          delayMio(2000);
         }
+      }
     }
     delayMio(500);
+    if (gameOver)
+      return false;
   }
 }
