@@ -87,8 +87,8 @@ const int blackButtonPinGreenP = 49;
 
 const int teleAPin = 52;
 const int teleBPin = 50;
-const int teleCPin = 53;
-const int teleDPin = 51;
+const int teleCPin = 51;
+const int teleDPin = 53;
 
 const byte buzzer = 27;
 byte minuti = 0;

@@ -60,9 +60,9 @@ void initialAnimation()
 
 
     if (buttonRedOperatorState == HIGH && buttonGreenOperatorState == HIGH)
-      return;
+      startGame = true;
 
-    switch (animationCounter)
+    switch (whichAnimation)
     {
       case 0:
         {

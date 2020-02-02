@@ -99,6 +99,7 @@ void checkCocco(int colorSignal[], int &counter, boolean & coccoConnesso, int co
       {
         cocchibenConnessi++;
         coccoConnesso = true;
+        Serial.println("ok cocco");
       }
     }
     else
